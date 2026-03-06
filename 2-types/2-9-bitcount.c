@@ -3,18 +3,20 @@
 int bitcount(unsigned x);
 
 int main() {
-  int x;
+  unsigned int x;
 
-  scanf("%d", &x);
-  printf("%b has %d 1 bits\n", x, bitcount(x));
+  puts("input x:");
+  scanf("%u", &x);
+
+  printf("x (%u): %b has 1 bits: %d\n", x, x, bitcount(x));
 }
 
 int bitcount(unsigned x) {
   int b = 0;
 
   while (x > 0) {
+    x &= (x - 1);
     b++;
-    x &= (x-1);
   }
 
   return b;

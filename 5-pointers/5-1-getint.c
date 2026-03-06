@@ -1,0 +1,37 @@
+#include <ctype.h>
+#include <stdio.h>
+#include "getch.c"
+
+int getint(int *pn);
+
+int main() {
+  int x = 0;
+  getint(&x);
+  printf("x = %d\n", x);
+}
+
+int getint(int *pn) {
+  int c, sign;
+
+  while (isspace(c = getch()))
+    ;
+  if (!isdigit(c) && c != EOF && c != '+' && c != '-') {
+    ungetch(c);
+    return 0;
+  }
+  sign = (c == '-') ? -1 : 1;
+  if (c == '+' || c == '-') {
+    c = getch();
+    if (c == '0') {
+      ungetch(c);
+      ungetch(sign ? '+' : '-');
+      return 0;
+    }
+  }
+  for (*pn = 0; isdigit(c); c = getch())
+    *pn = 10 * *pn + (c - '0');
+  *pn *= sign;
+  if (c != EOF)
+    ungetch(c);
+  return c;
+}

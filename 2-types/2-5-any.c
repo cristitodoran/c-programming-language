@@ -1,26 +1,12 @@
 #include <stdio.h>
-#define MAX 10
+#define MAX 1000
 
 int any(char s1[], char s2[]);
-
 int main() {
-  char s1[MAX], s2[MAX], c;
-  int i;
+  char s1[MAX] = "acum ori niciodata";
+  char s2[MAX] = "zzzx";
 
-  while ((c = getchar()) != '\n') {
-    s1[i++] = c;
-  }
-
-  i = 0;
-
-  while ((c = getchar()) != '\n') {
-    s2[i++] = c;
-  }
-
-  printf("\ns1: %s\n", s1);
-  printf("s2: %s\n", s2);
-
-  printf("\nany: %d\n", any(s1, s2));
+  printf("any s1: %s with s2: %s is: %d\n", s1, s2, any(s1, s2));
 }
 
 int any(char s1[], char s2[]) {
@@ -33,6 +19,5 @@ int any(char s1[], char s2[]) {
       }
     }
   }
-
   return -1;
 }

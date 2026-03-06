@@ -1,22 +1,25 @@
 #include <stdio.h>
 
-unsigned setbits(unsigned x, int p, int n, unsigned y);
+unsigned int setbits(unsigned int x, int p, int n, unsigned int y);
 
 int main() {
-  unsigned x, y;
-  scanf("%d %d", &x, &y);
+  unsigned int x, y;
+  int p, n;
 
-  printf("\nx=%d - %b\n", x, x);
-  printf("y=%d - %b\n", y, y);
-  printf("setbits: %b\n", setbits(x, 2, 3, y));
+  puts("Input parameters x, p, n, y:");
+  scanf("%d %d %d %d", &x, &p, &n, &y);
+  printf("x (%d): %b\n", x, x);
+  printf("y (%d): %b\n", y, y);
+  unsigned int result = setbits(x, p, n, y);
+  printf("setbits (%d): %b\n", result, result);
 }
 
-// returns x with the n bits that begin at position p
-// set to the rightmost n bits of y,
-// leaving the other bits unchanged
-unsigned setbits(unsigned x, int p, int n, unsigned y) {
-  unsigned xbits = x & ~(~(~0 << n) << (p + 1 - n));
-  unsigned ybits = (y & ~(~0 << n)) << (p + 1 - n);
+unsigned int setbits(unsigned int x, int p, int n, unsigned int y){
+  int lastNBits = y & ~(~0 << n);
+  int pBits = lastNBits << (p - n + 1);
+  int cleared = ~((~(~0 << n)) << (p - n + 1));
+  x = x & cleared;
+  int result = x | pBits;
 
-  return xbits | ybits;
+  return result;
 }

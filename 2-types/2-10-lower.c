@@ -3,9 +3,9 @@
 int lower(int c);
 
 int main() {
-  printf("%c\n", lower('B'));
+  printf("Converting %c to lowercase gives %c\n", 'B', lower('B'));
 }
 
 int lower(int c) {
-  return c >= 'A' && c <= 'Z' ? c + 'a' - 'A' : c;
+  return (c >= 'A' && c <= 'Z') ? 'a' + (c - 'A') : c;
 }
